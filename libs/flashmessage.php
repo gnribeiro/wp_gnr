@@ -9,7 +9,7 @@
  *
  * Internally, the flash message is removed, once you open a new URI.
  *
- * In order for the flash functionality for work properly, remember to 
+ * In order for the flash functionality for work properly, remember to
  * initialize sessions on all pages AND call the unsetFlash() function on ALL
  * pages as well.
  */
@@ -36,7 +36,8 @@ function flash($type, $message) {
 function unsetFlash() {
   if(isset($_SESSION['flash'])) {
     if($_SERVER['REQUEST_URI'] != $_SESSION['flash']['uri']) {
-      $_SESSION['flash'] = null;
+      //$_SESSION['flash'] = null;
+      unset($_SESSION['flash']);
     }
   }
 }
@@ -49,7 +50,7 @@ function getFlash($type) {
   if(isset($_SESSION['flash'])) {
     return $_SESSION['flash'][$type];
   }
-  
+
   return null;
 }
 

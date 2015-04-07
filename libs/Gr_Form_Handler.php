@@ -1,13 +1,13 @@
-<?php 
-require_once LIBS . 'validFluent.php'; 
+<?php
+require_once LIBS . 'validFluent.php';
 
 
 
 Class GR_Form_Handler {
-    
+
     public static function init() {
         add_action( 'wp_loaded', array( __CLASS__, 'contacts_action' ), 20 );
-    
+
     }
 
     public static function  contacts_action(){
@@ -18,7 +18,7 @@ Class GR_Form_Handler {
         if ( empty( $_POST[ 'action' ] ) || 'contacts' !== $_POST[ 'action' ] || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'contact-form' ) ) {
             return;
         }
-        
+
         $validation      = new ValidFluent($_POST);
         $requerid        = 'Preenchimento Obrigatório';
         $invalid_email   = 'Email inválido';
@@ -34,7 +34,6 @@ Class GR_Form_Handler {
             ->required( $requerid );
 
         if(!$validation->isGroupValid()){
-            pr($validation->getError('email'));
             flash("nome-error"    , $validation->getError('nome'));
             flash("phone-error"   , $validation->getError('phone'));
             flash("email-error"   , $validation->getError('email'));
@@ -43,8 +42,8 @@ Class GR_Form_Handler {
         }
         else{
              pr('ok');
-        }   
-    }  
+        }
+    }
 }
 
 GR_Form_Handler::init();

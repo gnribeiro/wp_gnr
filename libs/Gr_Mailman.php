@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Gr_Mailman {
 
@@ -95,7 +95,7 @@ class Gr_Mailman {
       extract($this->vars);
     }
     ob_start();
-    include get_template_directory()."/mailman_templates/" . $this->data['template'];
+    include get_template_directory()."views/emails/" . $this->data['template'];
     return ob_get_clean();
   }
 

@@ -1,29 +1,29 @@
-<?php 
-    
+<?php
+
     require_once LIBS . 'Exg_Mailman.php';
     require_once LIBS . 'validFluent.php';
-    
+
     Class Gr_Ajax{
 
-        function __construct() 
+        function __construct()
         {
-          
-            add_action( 'wp_ajax_contacts',       array( &$this, 'contacts' ) );
-            add_action( 'wp_ajax_nopriv_contacts', array( &$this, 'contacts' ) ); 
 
-            add_action( 'wp_ajax_search_ajax_products', array( &$this, 'search_ajax_products') );
-            add_action( 'wp_ajax_nopriv_search_ajax_products', array( &$this, 'search_ajax_products') );
+            // add_action( 'wp_ajax_contacts',       array( &$this, 'contacts' ) );
+            // add_action( 'wp_ajax_nopriv_contacts', array( &$this, 'contacts' ) );
 
-            add_action( 'wp_ajax_subscribe', array( &$this, 'subscribe') );
-            add_action( 'wp_ajax_nopriv_subscribe', array( &$this, 'subscribe') );
-           
+            // add_action( 'wp_ajax_search_ajax_products', array( &$this, 'search_ajax_products') );
+            // add_action( 'wp_ajax_nopriv_search_ajax_products', array( &$this, 'search_ajax_products') );
+
+            // add_action( 'wp_ajax_subscribe', array( &$this, 'subscribe') );
+            // add_action( 'wp_ajax_nopriv_subscribe', array( &$this, 'subscribe') );
+
         }
 
 
 
         public function contacts()
         {     $output = array();
-    
+
             if( isset( $_POST['data'] ) && $_POST){
                 parse_str( $_POST['data'] ,  $params)  ;
 
@@ -33,25 +33,25 @@
 
                 $validation = new ValidFluent($params);
 
-                $invalid_emal =  (ICL_LANGUAGE_CODE == en ) ? 'Invalid Email'    : 'Email inválido' ;    
+                $invalid_emal =  (ICL_LANGUAGE_CODE == en ) ? 'Invalid Email'    : 'Email inválido' ;
                 $requerid     =  (ICL_LANGUAGE_CODE == en ) ? 'Mandatory Field'  : 'Preenchimento Obrigatório' ;
                 $selctToppic  =  (ICL_LANGUAGE_CODE == en ) ? 'Select a Topic'   : 'Preenchimento Obrigatório' ;
 
- 
+
                 $validation->name('email')
                      ->required( $requerid )
                      ->email($invalid_emal);
 
                 $validation->name('msg')
                      ->required( $requerid );
-      
+
 
 
 
                 $topic_error = ($params['topics'] === 'default topic') ?  $selctToppic  : '';
 
                 if(!$validation->isGroupValid() || $params['topics'] === 'default topic'){
-                
+
                     $errors = array(
                         'topics' => $topic_error,
                         'email'  => $validation->getError('email'),
@@ -81,8 +81,8 @@
                     );
                 }
             }
-            
-            
+
+
             echo    json_encode( $output);
             die();
         }
@@ -92,7 +92,7 @@
         }
 
         function subscribe(){
-        
+
             $output = array();
 
             if( isset( $_POST['data_ne'] ) && $_POST){
@@ -103,10 +103,10 @@
 
                 $validation = new ValidFluent($params);
 
-                $invalid_email =  (ICL_LANGUAGE_CODE == en ) ? 'Invalid Email'    : 'Email inválido' ;    
+                $invalid_email =  (ICL_LANGUAGE_CODE == en ) ? 'Invalid Email'    : 'Email inválido' ;
                 $requerid      =  (ICL_LANGUAGE_CODE == en ) ? 'Mandatory Field'  : 'Preenchimento Obrigatório' ;
 
-                
+
                 $validation->name('ne')
                      ->required( $requerid  )
                      ->email($invalid_email );
@@ -119,7 +119,7 @@
                 if(!$validation->isGroupValid()) {
 
                     $errors = array(
-                     
+
                         'ne'  => $validation->getError('ne'),
                         'name'   => $validation->getError('name')
                     );
@@ -149,27 +149,27 @@
 
             if($posts === false)
                 return;
-            
+
             //die(var_dump($wpdb));
-            $message             =  (ICL_LANGUAGE_CODE == en ) ? 'The email referred has already subscribed this newsletter'    : 'Esse email já existe na base dados' ; 
+            $message             =  (ICL_LANGUAGE_CODE == en ) ? 'The email referred has already subscribed this newsletter'    : 'Esse email já existe na base dados' ;
             $email               = $posts['ne'];
             $knewsusers_table    = $wpdb->prefix . 'knewsusers';
             $knewsuserslists_tb  = $wpdb->prefix . 'knewsuserslists';
             $knewsusersextra     = $wpdb->prefix . 'knewsusersextra';
-           
+
 
             $email_exist        = $wpdb->get_row('SELECT * FROM  '.$knewsusers_table.' WHERE email = "'.$email.'";');
 
             if( empty($email_exist) ){
               $args    = array(
-                          'lang'    => $posts['lang'], 
-                          'email'   => $email, 
-                          'state'   => '2', 
-                          'ip'      => '', 
+                          'lang'    => $posts['lang'],
+                          'email'   => $email,
+                          'state'   => '2',
+                          'ip'      => '',
                           'confkey' => $this->get_unique_id(),
                           'joined'  => date("Y-m-d H:i:s")
                      );
-         
+
               $results = $wpdb->insert( $knewsusers_table , $args );
 
               if($results){
@@ -182,19 +182,19 @@
 
                 $query   = "INSERT INTO " . $knewsuserslists_tb . " (id_user, id_list) VALUES (" . $user_id . ", 1);";
                 $results = $wpdb->query( $query );
-               
+
                 $message = (ICL_LANGUAGE_CODE == en ) ? 'Successfull subscription' : 'Subscrição efetuada com sucesso.' ;
               }
               else{
                 $message = (ICL_LANGUAGE_CODE == en ) ? 'An error has occurred . Try again.' : '"Ocorreu um erro. tente novamente.' ;
               }
-            }       
+            }
 
             return $message;
         }
 
         public function send_mail($template_args){
-            
+
 
             $mail    = new Exg_Mailman();
             //gnoribeiro@gmail.com
@@ -203,14 +203,14 @@
             $emailTo =   (preg_match('@wpp.zonedevel.com|staging.excentricgrey.com@', $_SERVER['HTTP_HOST'])) ? 'filipa.figueiredo@excentricgrey.com' :'info@getitonstore.com';
             $mail->set_subject('Formulário de contacto Loja Online');
             $mail->set_template('form-contacts.php');
-            $mail->set_from("Get it On <no-reply@getitonstore.com>");  
-            $mail->set_to($emailTo);  
-            $mail->set_vars($template_args); 
-            $mail->send(); 
+            $mail->set_from("Get it On <no-reply@getitonstore.com>");
+            $mail->set_to($emailTo);
+            $mail->set_vars($template_args);
+            $mail->send();
         }
 
 
-    
+
 
 
         public function search_ajax_products() {
