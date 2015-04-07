@@ -7,7 +7,7 @@ Class Gr_Hooks{
     public function __construct() {
         //add_action( 'init', array( $this, 'add_test' ) );
       
-        //add_filter( 'teste_comment_text', array( $this, 'filter_profanity') , 10, 2 );
+        add_filter( 'comment_text', array( $this, 'filter_profanity') , 10, 2 );
         //add_action('teste_publish_post', array($this, 'send'));
 
 
@@ -18,6 +18,13 @@ Class Gr_Hooks{
         }
 
         $this->init_query_vars();
+    }
+
+    public function filter_profanity($content , $args){
+        global $site;
+
+        pr($site->uri);
+       
     }
 
     public function init_query_vars() {

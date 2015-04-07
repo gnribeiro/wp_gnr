@@ -44,7 +44,25 @@ class Helper {
           echo "selected='selected'";
     }
 
-     public static function check_selected($key , $value){
+
+    public static function input_value($name , $error = null , $method = 'POST') {
+
+        $request_method =  ($method === 'POST') ? $_POST : $_GET;
+        
+        if(is_null($error)){
+          echo '';
+        }
+        elseif(isset($request_method[$name])){
+
+        }
+        else{
+          echo '';
+        }  
+ 
+
+    }
+
+    public static function check_selected($key , $value){
      
 
       if( $key == $value )
@@ -161,29 +179,29 @@ class Helper {
           if(isset($_GET['s'])){
             
             $title = (ICL_LANGUAGE_CODE == 'en') ? sprintf("Search for %s" , $_GET['s']) : sprintf( "Pesquisou por  %s"  , $_GET['s']);
-            return "Get it On - " . $title;
+            return $title;
           }
           else{
            
             $title = (ICL_LANGUAGE_CODE == 'en') ?  "Search "   :  "Pesquisa";
-            return   "Get it On - " . $title;
+            return    $title;
            
           }
         }
         elseif(is_post_type_archive('promotions')){
            $title = (ICL_LANGUAGE_CODE == 'en') ?  "Promotions "   :  "Promoções";
-            return "Get it On - " . $title;
+            return $title;
         }
         else {
 
 
 
-        $title = wp_title('-' , false, 'right');
+        $title = wp_title('-' , true, 'right');
 
 
-        $title =  str_replace(array(' - Get it On' , 'Arquivos')  , "",  $title);
+        //$title =  str_replace(array(' ' , 'Arquivos')  , "",  $title);
 
-          return  "Get it On - " .$title ;
+          return  $title ;
         }
     }
     

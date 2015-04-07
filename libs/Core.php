@@ -33,8 +33,10 @@ $load_libs = array(
     'View',
     'Helper',
     'Gr_Hooks',
+    'flashmessage',
     'Base',
-    'Site'
+    'Site',
+    'GR_Form_Handler'
 );
 
 
