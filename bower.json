@@ -1,0 +1,65 @@
+{
+   "name": "bower_test",
+  "version": "1",
+  "description": "base html",
+  "main": [
+    "assets/css/index.css",
+    "assets/js/index.js",
+    "assets/less/index.less"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "base",
+    "html"
+  ],
+  "authors": [
+    "goncalo ribeiro"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "sources",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "git://github.com/components/jquery.git#~2.1.3",
+    "slick-carousel": "~1.4.1",
+    "bootstrap": "~3.3.4",
+    "modernizr-min": "git://github.com/chatii2412/modernizr-min.git#~2.8.3",
+    "iCheck": "git://github.com/fronteed/iCheck.git#~1.0.2",
+    "jquery-dropkick2": "git://github.com/changalberto/DropKick#~1.0.0",
+    "jquery-migrate": "git://github.com/jquery/jquery-migrate.git#~1.2.1",
+    "lesshat": "3.0.2",
+    "gsap": "git://github.com/greensock/GreenSock-JS.git#~1.16.1"
+  },
+  "install" : {
+   "path" : {
+     "css": "assets/css/vendor",
+     "js": "assets/js/vendor",
+     "less": "assets/less/vendor",
+     "eot": "assets/others/fonts",
+     "svg": "assets/others/fonts",
+     "ttf": "assets/others/fonts",
+     "html": "assets/others/html",
+     "woff": "assets/others/fonts",
+     "woff2": "assets/others/fonts"
+   },
+
+   "bower_components": {
+     "bootstrap": [
+        "bower_components/bootstrap/less/*",
+        "bower_components/bootstrap/dist/js/bootstrap.js"
+      ],
+     
+      "modernizr": [
+        "bower_components/modernizr-min/modernizr.min.js"
+      ]
+   }
+
+  }
+}
