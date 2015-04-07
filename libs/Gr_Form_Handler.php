@@ -1,8 +1,6 @@
 <?php
 require_once LIBS . 'validFluent.php';
 
-
-
 Class GR_Form_Handler {
 
     public static function init() {

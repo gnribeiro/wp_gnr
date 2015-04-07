@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 $views  = 'views';
@@ -8,7 +8,7 @@ $config = 'config';
 if ( ! is_dir($views) AND is_dir(DOCROOT.$views)){
       $views = DOCROOT.$views;
 }
- 
+
 if ( ! is_dir($libs) AND is_dir(DOCROOT.$libs)){
     $libs = DOCROOT.$libs;
 }
@@ -36,6 +36,7 @@ $load_libs = array(
     'flashmessage',
     'Base',
     'Site',
+    'Gr_Shortcodes',
     'GR_Form_Handler'
 );
 
@@ -45,13 +46,13 @@ foreach ($load_libs as $value) {
         return;
 
     if(is_file( $class = LIBS . $value . EXT ))
-        include $class ; 
-     
+        include $class ;
+
 }
 
 if(is_admin()){
     include LIBS . 'Admin' . EXT;
-    $admin = new Admin(); 
+    $admin = new Admin();
 }
 
 
