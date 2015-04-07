@@ -1,36 +1,65 @@
-<?php 
+<?php
 
 Class Gr_Hooks{
-    /** @public array Query vars to add to wp */
+
     public $query_vars = array();
 
     public function __construct() {
         //add_action( 'init', array( $this, 'add_test' ) );
-      
-        add_filter( 'comment_text', array( $this, 'filter_profanity') , 10, 2 );
+        //add_filter( 'comment_text', array( $this, 'filter_profanity') , 10, 2 );
         //add_action('teste_publish_post', array($this, 'send'));
 
 
         if ( ! is_admin() ) {
-            add_filter( 'query_vars', array( $this, 'add_query_vars'), 0 );
+            add_filter( 'query_vars',    array( $this, 'add_query_vars'), 0 );
             add_action( 'parse_request', array( $this, 'parse_request'), 0 );
-            add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) ); 
+            add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
         }
+
+        remove_action('wp_head', 'rsd_link');
+        remove_action('wp_head', 'wlwmanifest_link');
+        remove_action('wp_head', 'wp_generator');
+        remove_action('wp_head', 'wp_shortlink_wp_head');
+
+        add_filter('wp_headers',        array( $this, 'remove_x_pingback') );
+        add_filter('style_loader_src',  array( $this, 'vc_remove_wp_ver_css_js'), 9999 );
+        add_filter('script_loader_src', array( $this, 'vc_remove_wp_ver_css_js'), 9999 );
+
+        // remove wpml generator
+        //remove_action( 'wp_head', array($sitepress, 'meta_generator_tag' ) );
 
         $this->init_query_vars();
     }
+
+
+    public function vc_remove_wp_ver_css_js( $src ) {
+        if ( strpos( $src, 'ver=' . get_bloginfo( 'version' ) ) )
+            $src = remove_query_arg( 'ver', $src );
+
+        $date = new DateTime();
+        $date = $date->format('Ymd');
+
+        return add_query_arg( array('ver' => $date), $src );
+    }
+
+
+    public function remove_x_pingback($headers) {
+        unset($headers['X-Pingback']);
+        return $headers;
+    }
+
 
     public function filter_profanity($content , $args){
         global $site;
 
         pr($site->uri);
-       
+
     }
 
     public function init_query_vars() {
         // Query vars to add to WP
         $this->query_vars = array(
-          
+
         );
     }
 
