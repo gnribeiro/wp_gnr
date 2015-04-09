@@ -1,6 +1,6 @@
 <?php
 
-Class Gr_Hooks{
+Class Gwp_Hooks{
 
     public $query_vars = array();
 
@@ -97,6 +97,6 @@ Class Gr_Hooks{
 }
 
 
-$grhooks = new Gr_Hooks();
+$grhooks = new Gwp_Hooks();
 ?>
 

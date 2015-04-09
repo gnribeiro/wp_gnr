@@ -13,7 +13,7 @@ Class Base{
         $this->data_header = array();
         $this->data_main   = array();
         $this->data_footer = array();
-        $this->view        = View::factory();  
+        $this->view        = View::factory();
     }
 
 
@@ -24,6 +24,8 @@ Class Base{
 
 
     public function set_header(){
+
+
         $this->view->set('data_header', $this->data_header);
         $this->view->set('head', $this->view->render('template/head'));
         return $this->view->render('template/header');
@@ -31,6 +33,8 @@ Class Base{
 
 
     public function set_footer(){
+        $options     = get_option( 'gwp_theme_options');
+        $this->data_footer['google_analytic'] = (is_array($options) && array_key_exists('gwp_google_analytic_id', $options)) ? $options['gwp_google_analytic_id']: '' ;
 
         $this->view->set('data_footer', $this->data_footer);
         return $this->view->render('template/footer');
@@ -41,7 +45,7 @@ Class Base{
 
         if(!defined(ICL_LANGUAGE_CODE))
             return;
-        
+
         global $wp;
         $langs = array();
 
@@ -52,22 +56,22 @@ Class Base{
           foreach($languages as $code => $l)
           {
             $query_string = (!empty($_SERVER["QUERY_STRING"])) ? '?'.$_SERVER["QUERY_STRING"] : '';
- 
+
             if( isset($_GET['product_cat'])  && !empty($query_string) ){
-                
-                     $query_string =  str_replace("-en", '', $query_string ); 
-                     
-                   
+
+                     $query_string =  str_replace("-en", '', $query_string );
+
+
                      if($l['language_code'] == 'en')
                         $query_string =  $query_string.'-en';
-            }              
-    
-            $langs[] = array( 
+            }
+
+            $langs[] = array(
                     'url'      =>  $l['url'] . $query_string,
                     'selected' => (ICL_LANGUAGE_CODE == $l['language_code']) ? 1 : 0,
                     'code'     => $l['language_code'],
                     'label'    => trim(preg_replace('@-\w+$@','', $l['language_code']))
-            ) ;  
+            ) ;
           }
 
           $this->view->set('langs' , $langs);
@@ -77,7 +81,7 @@ Class Base{
 
     public function pagination($num_pages){
         $big = 999999999;
-        
+
         $pagination = paginate_links( array(
             'base'         => esc_url( str_replace( 999999999, '%#%', remove_query_arg( 'add-to-cart', htmlspecialchars_decode( get_pagenum_link( 999999999 ) ) ) ) ),
             'format'    => '?page=%#%',

@@ -1,6 +1,4 @@
 <?php
-
-
 $views  = 'views';
 $libs   = 'libs';
 $config = 'config';
@@ -17,7 +15,7 @@ if ( ! is_dir($config) AND is_dir(DOCROOT.$config)){
     $config = DOCROOT.$config;
 }
 
-define('VIEWS'      , realpath($views).DIRECTORY_SEPARATOR);
+define('VIEWS'     , realpath($views).DIRECTORY_SEPARATOR);
 define('LIBS'      , realpath($libs).DIRECTORY_SEPARATOR);
 define('CONFIG'    , realpath($config).DIRECTORY_SEPARATOR);
 define('THEMEURL'  , get_template_directory_uri().DIRECTORY_SEPARATOR);
@@ -28,26 +26,23 @@ unset($libs, $views, $config);
  if(is_file( $customPostTypes =  CONFIG . 'customPostTypes.php'))
         include $customPostTypes ;
 
+include LIBS . 'View' . EXT;
+include LIBS . 'Helper' . EXT;
 
 $load_libs = array(
-    'View',
-    'Helper',
-    'Gr_Hooks',
-    'flashmessage',
+    'Gwp_Hooks',
     'Base',
     'Site',
-    'Gr_Shortcodes',
-    'GR_Form_Handler'
+    'Gwp_Shortcodes',
+    'Gwp_Form_Handler'
 );
 
 
 foreach ($load_libs as $value) {
-    if(is_admin())
-        return;
-
-    if(is_file( $class = LIBS . $value . EXT ))
-        include $class ;
-
+    if(!is_admin()){
+        if(is_file( $class = LIBS . $value . EXT ))
+            include $class ;
+    }
 }
 
 if(is_admin()){
@@ -55,9 +50,10 @@ if(is_admin()){
     $admin = new Admin();
 }
 
-
-$site_instance = new Site();
-$GLOBALS['site'] = $site_instance;
+if(!is_admin()){
+    $site_instance = new Site();
+    $GLOBALS['site'] = $site_instance;
+}
 
 function pr( $var ) {
     print( '<pre class="dump">' );

@@ -1,6 +1,6 @@
 <?php
 
-Class Gr_Shortcodes {
+Class Gwp_Shortcodes {
 
     public static function init() {
         // Define shortcodes
@@ -13,7 +13,6 @@ Class Gr_Shortcodes {
         }
     }
 
-
     public static function youtube($atts, $content=null) {
         extract(shortcode_atts( array('id' => ''), $atts));
 
@@ -23,8 +22,7 @@ Class Gr_Shortcodes {
 
         return $view->render('shortcodes/youtube');
     }
-
 }
 
-Gr_Shortcodes::init();
+Gwp_Shortcodes::init();
 ?>

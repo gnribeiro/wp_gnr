@@ -1,7 +1,7 @@
 <?php
 require_once LIBS . 'validFluent.php';
 
-Class GR_Form_Handler {
+Class Gwp_Form_Handler {
 
     public static function init() {
         add_action( 'wp_loaded', array( __CLASS__, 'contacts_action' ), 20 );
@@ -32,11 +32,11 @@ Class GR_Form_Handler {
             ->required( $requerid );
 
         if(!$validation->isGroupValid()){
-            flash("nome-error"    , $validation->getError('nome'));
-            flash("phone-error"   , $validation->getError('phone'));
-            flash("email-error"   , $validation->getError('email'));
-            flash("mensage-error" , $validation->getError('mensage'));
-            flash("error"         , true);
+            Helper::set_flashdata("nome-error"    , $validation->getError('nome'));
+            Helper::set_flashdata("phone-error"   , $validation->getError('phone'));
+            Helper::set_flashdata("email-error"   , $validation->getError('email'));
+            Helper::set_flashdata("mensage-error" , $validation->getError('mensage'));
+            Helper::set_flashdata("error"         , true);
         }
         else{
              pr('ok');
@@ -44,5 +44,5 @@ Class GR_Form_Handler {
     }
 }
 
-GR_Form_Handler::init();
+Gwp_Form_Handler::init();
 ?>

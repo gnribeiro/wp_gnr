@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 Class  View{
     protected $_data = array();
@@ -7,14 +7,14 @@ Class  View{
     public $path;
 
     public function __construct($file = NULL, array $data = NULL){
-    
+
         $this->path = VIEWS;
 
         if ($file !== NULL)
         {
             $this->set_filename($file);
         }
-     
+
         if ($data !== NULL)
         {
             // Add the values to the current data
@@ -29,7 +29,7 @@ Class  View{
 
     public function bind($key, & $value){
         $this->_data[$key] =& $value;
- 
+
         return $this;
     }
 
@@ -39,12 +39,12 @@ Class  View{
     }
 
 
-    
+
     public function render($file = NULL){
         if ($file !== NULL){
             $this->set_filename($file);
         }
-     
+
         if (empty($this->_file)){
             throw new Exception('You must set the file to use within your view before rendering');
         }
@@ -61,7 +61,7 @@ Class  View{
         else{
             $this->_data[$key] = $value;
         }
-     
+
         return $this;
     }
 
@@ -75,7 +75,7 @@ Class  View{
         }
 
         $this->_file = $path;
-     
+
         return $this;
     }
 
@@ -95,42 +95,42 @@ Class  View{
     }
 
 
-    protected static function capture($kohana_view_filename, array $kohana_view_data){
+    protected static function capture($view_filename, array $view_data){
         // Import the view variables to local namespace
-        extract($kohana_view_data, EXTR_SKIP);
-     
+        extract($view_data, EXTR_SKIP);
+
         if (View::$_global_data)
         {
             // Import the global view variables to local namespace
             extract(View::$_global_data, EXTR_SKIP);
         }
-     
+
         // Capture the view output
         ob_start();
-     
+
         try
         {
             // Load the view within the current scope
-            include $kohana_view_filename;
+            include $view_filename;
         }
         catch (Exception $e)
         {
             // Delete the output buffer
             ob_end_clean();
-     
+
             // Re-throw the exception
-            die( "Can't capture this view" . $kohana_view_filename );
+            die( "Can't capture this view" . $view_filename );
         }
-     
+
         // Get the captured output and close the buffer
         return ob_get_clean();
     }
 
 
     public function __unset($key){
-    
+
         unset($this->_data[$key], View::$_global_data[$key]);
-    
+
     }
 
     public function & __get($key){
@@ -157,7 +157,7 @@ Class  View{
 
 
     public function __toString(){
-       return $this->render(); 
+       return $this->render();
     }
 }
 ?>

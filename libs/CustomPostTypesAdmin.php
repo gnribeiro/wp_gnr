@@ -1,13 +1,13 @@
-<?php 
+<?php
 
-class CustomPostTypesAdmin{
-    
+Class CustomPostTypesAdmin{
+
     protected  $cpt  = array();
-  
-  
+
+
     public function __construct(){
         $this->get_customPosts();
-        add_action('init', array($this, 'register_ctps')); 
+        add_action('init', array($this, 'register_ctps'));
     }
 
 
@@ -18,10 +18,10 @@ class CustomPostTypesAdmin{
                 foreach ($cpt as $key => $value) {
 
                     if(is_array($value)){
-                        $this->cpt[$key] = $value;  
+                        $this->cpt[$key] = $value;
                     }
                 }
-            } 
+            }
         }
     }
 

@@ -2,12 +2,12 @@
 require_once( 'validFluent.php' );
 
 class Newsletter_form {
-  
+
   function __construct() {
-    add_action( 'wp_head', array( &$this, 'add_ajax_library' ) );    
+    add_action( 'wp_head', array( &$this, 'add_ajax_library' ) );
     add_action( 'wp_ajax_subscribe',       array( &$this, 'subscribe' ) );
-    add_action( 'wp_ajax_nopriv_subscribe', array( &$this, 'subscribe' ) ); 
-   
+    add_action( 'wp_ajax_nopriv_subscribe', array( &$this, 'subscribe' ) );
+
   }
 
 
@@ -17,21 +17,21 @@ class Newsletter_form {
     $html .= 'var ajaxurl = "' . admin_url( 'admin-ajax.php' ) . '"';
     $html .= '</script>';
 
-    echo $html; 
-  } 
+    echo $html;
+  }
 
 
   function subscribe(){
-    
+
     if( isset( $_POST['ne'] ) && $_POST){
-      
+
       $output     = array();
       $validation = new ValidFluent($_POST);
-     
+
       $validation->name('ne')
                  ->required(__('Prenchimento Obrigatórios' , 'anubis'))
                  ->email(__('Email inválido' , 'anubis'));
-      
+
       if(!$validation->isGroupValid()){
         $output = array(
             'error'   => 1,
@@ -61,8 +61,8 @@ class Newsletter_form {
     );
 
     $user = NewsletterSubscription::instance()->subscribe();
-        
-    return ($user->status=='E' ||  $user->status=='C') ? $message[$user->status] : __("Ocorreu um erro." , 'anubis') ; 
+
+    return ($user->status=='E' ||  $user->status=='C') ? $message[$user->status] : __("Ocorreu um erro." , 'anubis') ;
   }
 
 
@@ -74,7 +74,7 @@ class Newsletter_form {
   private function subscription_knews(){
     global $wpdb;
 
-    
+
     //die(var_dump($wpdb));
     $message            = __("Esse email já existe na base dados" , 'anubis');
     $email              = $_REQUEST['ne'];
@@ -84,14 +84,14 @@ class Newsletter_form {
 
     if( empty($email_exist) ){
       $args    = array(
-                  'lang'    => 'en', 
-                  'email'   => $email, 
-                  'state'   => '2', 
-                  'ip'      => '', 
+                  'lang'    => 'en',
+                  'email'   => $email,
+                  'state'   => '2',
+                  'ip'      => '',
                   'confkey' => $this->get_unique_id(),
                   'joined'  => date("Y-m-d H:i:s")
              );
- 
+
       $results = $wpdb->insert( $knewsusers_table , $args );
 
       if($results){
@@ -99,14 +99,14 @@ class Newsletter_form {
 
         $query   = "INSERT INTO " . $knewsuserslists_tb . " (id_user, id_list) VALUES (" . $user_id . ", 1);";
         $results = $wpdb->query( $query );
-       
+
         $message = __("Subscrição efetuada com sucesso."  , 'anubis');
       }
       else{
         $message = __("Ocorreu um erro. tente novamente." , 'anubis');
 
       }
-    }       
+    }
 
     return $message;
   }
@@ -123,38 +123,38 @@ class Newsletter_form {
     $email_exist   = $wpdb->get_row('SELECT * FROM  '.$meenews_table.' WHERE email = "'.$email.'";');
 
     if( empty($email_exist) ){
-     
+
       $confkey = md5(uniqid(rand(),1));
       $date    = date("Y-m-d H:i:s");
       $args    = array(
-                  'id_categoria' => '0', 
-                  'email'        => $email, 
-                  'name'         => '', 
-                  'enterprise'   => '', 
-                  'state'        => 2, 
+                  'id_categoria' => '0',
+                  'email'        => $email,
+                  'name'         => '',
+                  'enterprise'   => '',
+                  'state'        => 2,
                   'confkey'      => md5(uniqid(rand(),1)),
                   'joined'       => date("Y-m-d H:i:s")
              );
-            
 
-      $message = ( $wpdb->insert( $meenews_table , $args ) ) 
+
+      $message = ( $wpdb->insert( $meenews_table , $args ) )
              ? __("Subscrição efetuada com sucesso."  , 'anubis')
              : __("Ocorreu um erro. tente novamente." , 'anubis');
-    }       
-    
+    }
+
     return $message;
   }
 
 
   private function cleanInput($input) {
-    
+
     $search = array(
       '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
       '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
       '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
       '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
     );
- 
+
     $output = preg_replace($search, '', $input);
     return $output;
   }
@@ -180,42 +180,42 @@ class Newsletter_form {
 
 
   private function xss_clean($str){
-  
+
     if (is_array($str) OR is_object($str))
     {
         foreach ($str as $k => $s)
         {
             $str[$k] = $this->xss_clean($s);
         }
- 
+
         return $str;
     }
- 
+
     // Remove all NULL bytes
     $str = str_replace("\0", '', $str);
- 
+
     // Fix &entity\n;
     $str = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $str);
     $str = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $str);
     $str = preg_replace('/(&#x*[0-9A-F]+);*/iu', '$1;', $str);
     $str = html_entity_decode($str);
- 
+
     // Remove any attribute starting with "on" or xmlns
     $str = preg_replace('#(?:on[a-z]+|xmlns)\s*=\s*[\'"\x00-\x20]?[^\'>"]*[\'"\x00-\x20]?\s?#iu', '', $str);
- 
+
     // Remove javascript: and vbscript: protocols
     $str = preg_replace('#([a-z]*)[\x00-\x20]*=[\x00-\x20]*([`\'"]*)[\x00-\x20]*j[\x00-\x20]*a[\x00-\x20]*v[\x00-\x20]*a[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2nojavascript...', $str);
     $str = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"]*)[\x00-\x20]*v[\x00-\x20]*b[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2novbscript...', $str);
     $str = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"]*)[\x00-\x20]*-moz-binding[\x00-\x20]*:#u', '$1=$2nomozbinding...', $str);
- 
+
     // Only works in IE: <span style="width: expression(alert('Ping!'));"></span>
     $str = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?expression[\x00-\x20]*\([^>]*+>#is', '$1>', $str);
     $str = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?behaviour[\x00-\x20]*\([^>]*+>#is', '$1>', $str);
     $str = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"]*.*?s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:*[^>]*+>#ius', '$1>', $str);
- 
+
     // Remove namespaced elements (we do not need them)
     $str = preg_replace('#</*\w+:\w[^>]*+>#i', '', $str);
- 
+
     do
     {
         // Remove really unwanted tags
@@ -223,7 +223,7 @@ class Newsletter_form {
         $str = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $str);
     }
     while ($old !== $str);
- 
+
     return $str;
   }
 }
