@@ -302,7 +302,7 @@ class Helper {
     }
 
     public static function refresh() {
-        $location = self::current_url();
+        $location = self::current_uri();
         $this->redirect($location);
     }
 
@@ -322,8 +322,18 @@ class Helper {
 
     }
 
-    public static  function current_url() {
+    public static  function current_uri() {
         return $_SERVER['REQUEST_URI'];
     }
+
+    public static function get_protocol(){
+       $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+       return $protocol
+    } 
+
+    public static function current_url(){
+       $url = self::get_protocol() . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+       return $url;
+    } 
 }
 ?>
