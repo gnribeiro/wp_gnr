@@ -4,12 +4,8 @@ Class Gwp_Hooks{
 
     public $query_vars = array();
 
-    public function __construct() {
-        //add_action( 'init', array( $this, 'add_test' ) );
-        //add_filter( 'comment_text', array( $this, 'filter_profanity') , 10, 2 );
-        //add_action('teste_publish_post', array($this, 'send'));
-
-
+    public function __construct() 
+    {
         if ( ! is_admin() ) {
             add_filter( 'query_vars',    array( $this, 'add_query_vars'), 0 );
             add_action( 'parse_request', array( $this, 'parse_request'), 0 );
@@ -28,8 +24,16 @@ Class Gwp_Hooks{
 
         // remove wpml generator
         //remove_action( 'wp_head', array($sitepress, 'meta_generator_tag' ) );
-
+        
+        $this->custom_hooks();
         $this->init_query_vars();
+    }
+    
+    public function custom_hooks() {
+        //add_action( 'init', array( $this, 'add_test' ) );
+        //add_filter( 'comment_text', array( $this, 'filter_profanity') , 10, 2 );
+        //add_action('teste_publish_post', array($this, 'send'));
+
     }
 
 

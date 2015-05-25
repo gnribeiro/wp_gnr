@@ -16,26 +16,50 @@ Class Theme_Options_Admin{
 
 
     public function gwp_theme_menu(){
-        add_theme_page( 'Theme Option', 'Theme Options', 'manage_options', 'gwp_theme_options.php', array($this , 'gwp_theme_page'));
+        add_menu_page( "Theme Options", "Theme Options", "manage_options", "theme-options", array($this , 'gwp_theme_page'), null, 99 );
     }
 
 
     public function gwp_theme_page() {
         echo $this->view->render("admin/theme_options/content");
     }
+    
+    
+    public function display_input_text($args){
+                
+        foreach($args as $key => $value){ 
+            
+            if($key == 'id'){
+                $value = stripslashes($value);
+                $value = esc_attr( $value);
+            }
+               
+            $this->view->set($key , $value) ;
+        }
+        
+        
+        echo $this->view->render("admin/theme_options/input-text");
+    
+    }
 
 
     public function gwp_register_settings(){
-        register_setting( 'gwp_theme_options', 'gwp_theme_options', array($this , 'gwp_validate_settings') );
-
+        add_settings_section("section", "All Settings", null, "theme-options");
+        
         $options = Helper::load_config('theme_options') ;
-
-        foreach ($options['sections'] as $key => $value) {
-            add_settings_section( $value['id'], $value['title'], array($this , $value['callback']), $value['page'] );
-        }
-
+        $validate_fields = array('text');
+        
         foreach ($options['fields'] as $key => $value) {
-            add_settings_field( $value['id'], $value['title'], array($this , $value['callback']), $value['page'], $value['section'], $value['args'] );
+            
+            if(!in_array($value['type'] , $validate_fields))
+                continue;
+                 
+            switch ( $value['type']  ) {
+                 case 'text':
+                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_text'), "theme-options", "section", $value['args'] );
+                    register_setting("section",  $value['id']);
+                break;
+            }
         }
     }
 

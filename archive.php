@@ -1,4 +1,4 @@
-<?php  get_header(); ?>
-
-
-<?php get_footer(); ?>
+<?php 
+    global $site;
+    $site->index();
+?>

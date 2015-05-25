@@ -328,7 +328,7 @@ class Helper {
 
     public static function get_protocol(){
        $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
-       return $protocol
+       return $protocol;
     } 
 
     public static function current_url(){

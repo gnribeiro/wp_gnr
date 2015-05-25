@@ -1,0 +1,1 @@
+<input type="text" name="<?php echo $name ?>" id="<?php echo id ?>" value="<?php echo get_option($id); ?>" />

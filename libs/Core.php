@@ -60,5 +60,4 @@ function pr( $var ) {
     var_dump( $var );
     print( '</pre>' );
 }
-
 ?>

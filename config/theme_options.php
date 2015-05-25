@@ -10,18 +10,30 @@
         ),
         'fields'  => array(
             array(
-                'id'       => 'google_analytic_id',
-                'title'    => 'Google Analytic Id',
-                'callback' => 'gwp_display_setting',
-                'page'     => 'gwp_theme_options.php',
-                'section'  => 'gwp_general_section',
+                'type'     => 'text',
+                'id'       => 'teste_id',
+                'title'    => 'Teste Id',
                 'args'     => array(
                     'type'      => 'text',
-                    'id'        => 'gwp_google_analytic_id',
-                    'name'      => 'gwp_google_analytic_id',
-                    'desc'      => 'The Google Analytic Id',
+                    'id'        => 'teste_id',
+                    'name'      => 'teste_id',
+                    'desc'      => 'teste Id',
                     'std'       => '',
                     'label_for' => 'gwp_google_analytic_id',
+                    'class'     => 'css_class'
+                )
+            ),
+            
+            array(
+                'type'     => 'text',
+                'id'       => 'teste_id2',
+                'title'    => 'Teste Id2',
+                'args'     => array(
+                    'id'        => 'teste_id2',
+                    'name'      => 'teste_id2',
+                    'desc'      => 'teste Id2',
+                    'std'       => '',
+                    'label_for' => 'teste_id22',
                     'class'     => 'css_class'
                 )
             )

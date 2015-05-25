@@ -33,11 +33,21 @@ Class Base{
 
 
     public function set_footer(){
-        $options     = get_option( 'gwp_theme_options');
-        $this->data_footer['google_analytic'] = (is_array($options) && array_key_exists('gwp_google_analytic_id', $options)) ? $options['gwp_google_analytic_id']: '' ;
 
         $this->view->set('data_footer', $this->data_footer);
         return $this->view->render('template/footer');
+    }
+    
+    
+    public function content($content)
+    {
+        
+        echo $this->set_header();
+        
+        $this->view->set('content', $content);
+        
+        echo $this->view->render('template/main');
+        echo $this->set_footer();
     }
 
 
