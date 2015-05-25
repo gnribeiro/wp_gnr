@@ -1,4 +1,4 @@
-<?php global $post ?>
+<?php global $post , $site; ?>
 
 <article>
     <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -18,9 +18,13 @@
     
     
 
-    $view =  View::factory();
-    $view->name = "goncalo";
-    echo $view->render("teste");
+//    $view =  View::factory();
+//    $view->name = "name";
+//    echo $view->render("teste");
+
+
+   $site->set_view('teste' , array('name'=>'goncalo')); 
+
 ?>
 
 

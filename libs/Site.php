@@ -39,6 +39,27 @@
             $content = $this->view->render($view);
             $this->content($content);    
         }
+        
+        
+        public function set_view($file , $data = array()){
+            
+            if(!file_exists (VIEWS . $file .EXT )){
+            
+                pr("THIS VIEW ({ $file }), DON`T EXIST");
+                return;
+            }
+                
+            
+            if(count($data)){
+            
+                foreach($data as $key => $value){ 
+                    $this->view->set($key , $value);
+                }    
+            }
+            
+            echo  $this->view->render($file);
+             
+        }
 
 
     }
