@@ -1,6 +1,6 @@
 <?php 
     global $site;
     $site->index();
-    //$site->set_view('page' , array('template' =>'index'));
+    //$site->set_content('page' , array('template' =>'index'));
 
 ?>

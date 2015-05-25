@@ -25,8 +25,9 @@
         }
         
         
-        public function set_view($file , $data = array()){
-            $view = (file_exists (VIEWS . $file )) ? $file : 'index';
+        public function set_content($file , $data = array()){
+            
+            $view = (file_exists (VIEWS . $file .EXT )) ? $file : 'fallback';
             
             if(count($data)){
             
@@ -35,7 +36,7 @@
                 }    
             }
             
-            $content = $this->view->render('page');
+            $content = $this->view->render($view);
             $this->content($content);    
         }
 
