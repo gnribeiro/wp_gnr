@@ -15,17 +15,20 @@ Class Theme_Options_Admin{
     }
 
 
-    public function gwp_theme_menu(){
+    public function gwp_theme_menu()
+    {
         add_menu_page( "Theme Options", "Theme Options", "manage_options", "theme-options", array($this , 'gwp_theme_page'), null, 99 );
     }
 
 
-    public function gwp_theme_page() {
+    public function gwp_theme_page() 
+    {
         echo $this->view->render("admin/theme_options/content");
     }
     
     
-    public function display_input_text($args){
+    public function display_input_text($args)
+    {
                 
         foreach($args as $key => $value){ 
             
@@ -41,13 +44,53 @@ Class Theme_Options_Admin{
         echo $this->view->render("admin/theme_options/input-text");
     
     }
+    
+    
+    public function display_input_checkbox($args)
+    {
+                
+        foreach($args as $key => $value){ 
+            
+            if($key == 'id'){
+                $value = stripslashes($value);
+                $value = esc_attr( $value);
+            }
+               
+            $this->view->set($key , $value) ;
+        }
+        
+     
+        echo $this->view->render("admin/theme_options/checkbox");
+    
+    }
+    
+    
+    public function display_input_select($args)
+    {
+                
+        foreach($args as $key => $value)
+        { 
+            
+            if($key == 'id'){
+                $value = stripslashes($value);
+                $value = esc_attr( $value);
+            }
+               
+            $this->view->set($key , $value) ;
+        }
+        
+     
+        echo $this->view->render("admin/theme_options/select");
+    
+    }
 
 
-    public function gwp_register_settings(){
+    public function gwp_register_settings()
+    {
         add_settings_section("section", "All Settings", null, "theme-options");
         
         $options = Helper::load_config('theme_options') ;
-        $validate_fields = array('text');
+        $validate_fields = array('text', 'checkbox', 'select');
         
         foreach ($options['fields'] as $key => $value) {
             
@@ -57,6 +100,14 @@ Class Theme_Options_Admin{
             switch ( $value['type']  ) {
                  case 'text':
                     add_settings_field( $value['id'], $value['title'], array($this , 'display_input_text'), "theme-options", "section", $value['args'] );
+                    register_setting("section",  $value['id']);
+                break;
+                 case 'checkbox':
+                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_checkbox'), "theme-options", "section", $value['args'] );
+                    register_setting("section",  $value['id']);
+                break;
+                 case 'select':
+                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_select'), "theme-options", "section", $value['args'] );
                     register_setting("section",  $value['id']);
                 break;
             }
@@ -87,27 +138,5 @@ Class Theme_Options_Admin{
               break;
         }
     }
-
-    function gwp_validate_settings($input){
-
-      //wp_die(var_dump($input));
-      foreach($input as $k => $v)
-      {
-        $newinput[$k] = trim($v);
-
-        // Check the input is a letter or a number
-        if(!preg_match('/^[A-Z0-9 _\.-]*$/i', $v)) {
-          $newinput[$k] = '';
-        }
-      }
-
-      return $newinput;
-    }
-
-    function gwp_display_section($section){
-
-    }
-
 }
-
 ?>

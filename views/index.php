@@ -9,32 +9,11 @@
 
 
 <?php
-
-    echo do_shortcode('[youtube id="qPKKtvkVAjY" ]Check out this video![/youtube]');
-
-    echo apply_filters('comment_text' , "teste2" , 'arg1') ;
-
+    //echo do_shortcode('[youtube id="qPKKtvkVAjY" ]Check out this video![/youtube]');
+    //do_action("wploop_query" , 'post_type=page&name=teste');
+    //do_action("wploop");
+    //$site->set_view('teste' , array('name'=>'goncalo')); 
     
-    
-    
-
-//    $view =  View::factory();
-//    $view->name = "name";
-//    echo $view->render("teste");
-
-
-   $site->set_view('teste' , array('name'=>'goncalo')); 
-
+    //$conf = Helper::load_config('site');
+    //echo  $conf['default_lang'] ;
 ?>
-
-
-
-
-
-
-
-
-<?php 
-
-$conf = Helper::load_config('site');
-echo  $conf['default_lang'] ; ?>

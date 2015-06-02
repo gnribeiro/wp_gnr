@@ -8,7 +8,8 @@ Class Base{
     public    $data_main;
     public    $data_footer;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->uri         = rtrim(preg_replace(array('@\?.*$@' , '#^/#', '@page/[\d]+@'), array('' , '', ''), $_SERVER['REQUEST_URI']),"/");
         $this->data_header = array();
         $this->data_main   = array();
@@ -17,14 +18,14 @@ Class Base{
     }
 
 
-    public function set_head(){
-
+    public function set_head()
+    {
         return Helper::siteInfo();
     }
 
 
-    public function set_header(){
-
+    public function set_header()
+    {
 
         $this->view->set('data_header', $this->data_header);
         $this->view->set('head', $this->view->render('template/head'));
@@ -32,12 +33,13 @@ Class Base{
     }
 
 
-    public function set_footer(){
+    public function set_footer()
+    {
 
         $this->view->set('data_footer', $this->data_footer);
         return $this->view->render('template/footer');
     }
-    
+
     
     public function content($content)
     {
@@ -49,9 +51,80 @@ Class Base{
         echo $this->view->render('template/main');
         echo $this->set_footer();
     }
+    
+    
+    public function fallback()
+    {
+        $this->set_content();
+    }
+    
+    
+    public function set_content($file = false , $data = array())
+    {
+        if($file === false ){
+            $view = 'fallback';
+        }    
+        elseif (file_exists (VIEWS . $file .EXT ))
+        {
+            $view = $file;
+        }
+        else{
+            $view ='fallback';
+        }
+            
+        if(count($data)){
+            
+            foreach($data as $key => $value){ 
+                $this->view->set($key , $value);
+            }    
+        }
+            
+        $content = $this->view->render($view);
+        $this->content($content);    
+    }
+        
+        
+    public function set_view($file , $data = array())
+    {        
+        if(!file_exists (VIEWS . $file .EXT )){
+            
+            pr("THIS VIEW ({ $file }), DON`T EXIST");
+            return;
+        }
+                
+            
+        if(count($data)){
+            
+            foreach($data as $key => $value){ 
+                $this->view->set($key , $value);
+            }    
+        }
+            
+        echo  $this->view->render($file);
+             
+    }
+        
+        
+    public function get_view($file , $data = array())
+    {
+            
+        if(!file_exists (VIEWS . $file .EXT )){
+            pr("THIS VIEW ({$file}), DON`T EXIST");
+            return;
+        }
 
+        if(count($data)){
+            foreach($data as $key => $value){ 
+                $this->view->set($key , $value);
+            }    
+        }
 
-    public function lang_menu(){
+        return  $this->view->render($file);
+    }
+    
+
+    public function lang_menu()
+    {
 
         if(!defined(ICL_LANGUAGE_CODE))
             return;
@@ -89,7 +162,9 @@ Class Base{
         }
     }
 
-    public function pagination($num_pages){
+    
+    public function pagination($num_pages)
+    {
         $big = 999999999;
 
         $pagination = paginate_links( array(
@@ -105,7 +180,8 @@ Class Base{
     }
 
 
-    public function current_url() {
+    public function current_url() 
+    {
         return $_SERVER['REQUEST_URI'];
     }
 }

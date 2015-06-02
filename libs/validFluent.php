@@ -547,6 +547,5 @@ class ValidFluent
 	    }
 	return $this;
 	}
-
-    }
+}
 ?>

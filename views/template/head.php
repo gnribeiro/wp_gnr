@@ -25,5 +25,3 @@
     var vars_site = {"theme_url":"<?php  echo THEMEURL ?>","ajax_url":" <?php echo admin_url( 'admin-ajax.php' ) ?>"};
     /* ]]> */
     </script>
-
-    

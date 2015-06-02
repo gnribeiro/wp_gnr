@@ -1,0 +1,4 @@
+<?php 
+    global $site;
+    $site->set_content('search');
+?>
