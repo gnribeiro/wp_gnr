@@ -112,7 +112,7 @@ Then create the static method where will be the shortcode code
 
 ### Site
 
-This class should have all the theme code. Basically hould be the  controller of your  theme. This Class have some methods that we will talk later
+This class should have all the theme code. Basically should be the  controller of your  theme. This Class have some methods that we will talk later
 
 
 ### Config System 
