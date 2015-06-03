@@ -50,7 +50,7 @@ In the construtor of this class add the wordpress actions for ajax and the metho
 ```sh
 add_action( 'wp_ajax_contacts',       array( &$this, 'contacts' ) );
 add_action( 'wp_ajax_nopriv_contacts', array( &$this, 'contacts' ) );
-```sh
+```
 
 Then create the method
 
@@ -60,7 +60,7 @@ public function contacts()
     //our code
     die();
 }
-```sh
+```
 
 
 ### Gwp_Hooks
@@ -81,7 +81,7 @@ This class should have all the wordpress hooks that you will create or use.
     {
         //our code
     }
-```sh
+```
 
 
 ### Gwp_Shortcodes
@@ -98,7 +98,7 @@ Add in the $shortcodes array, in the init method of this class, all the shortcod
         );
     }
 
-```sh
+```
 
 Then create the static method where will be the shortcode code
 
@@ -107,7 +107,7 @@ Then create the static method where will be the shortcode code
         our code
     }
 
-```sh
+```
 
 
 ### Site
@@ -126,14 +126,14 @@ Configuration files are used to store any kind of configuration needed for the t
             'foo' => 'bar',
         ),
     );
-```sh
+```
 
 If the above configuration file was called myconf.php, you could access it using:
 
 ```sh
     $conf = Helper::load_config('myconf');
     echo  $conf['setting'] ;
-```sh
+```
 
 
 ### Theme Options 
@@ -219,7 +219,7 @@ Is a Configuration file (site.php) where you set all your theme configuration
         'default_lang'  => 'pt',
         'protocol'      => 'http://',
     );
-```sh
+```
 
 
 ### Lang Config 
@@ -231,7 +231,7 @@ If your theme is multilang, there is also Configuration file (lang.php).
         'name'   => 'namespace',
         'folder' => '/lang'
     );
-```sh
+```
 
 The folder is where your files.po will be and the name is the namespace of _E("string" , namespace). Important in the configuration file site.php the option multilang should be true
 
@@ -245,19 +245,19 @@ Add Flashdata:
 
 ```sh
      Helper::set_flashdata("name"   , value);
-```sh
+```
 
 Get Flashdata:
 
 ```sh
      Helper::get_flashdata("name");
-```sh
+```
 
 Delete all Flashdata:
 
 ```sh
      Helper::unset_all_flashdata();
-```sh
+```
 
 
 
@@ -274,7 +274,7 @@ Create a view and set is variables
     
     echo $view->render('viewfilename');
 
-```sh
+```
 
 ### Wordpress template files
 
@@ -284,7 +284,7 @@ In this theme you dont need to always call the header and the footer you just ne
      global $site;
     
     $site->set_content('page' , array('template' =>'index'));
-```sh
+```
 
 In the set_content method the first param is the view you want to call , and the second param is a array of the view variables
 
@@ -300,7 +300,7 @@ Site Class code :
         $content = $this->view->render('page');
         $this->content($content);
     }
-```sh
+```
 
 In themplate file 
 ```sh
@@ -308,7 +308,7 @@ In themplate file
         global $site;
         $site->page();
     ?>
-```sh
+```
 
 
 The views header , head , footer , and main (the content view) are in views/template/
