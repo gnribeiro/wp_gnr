@@ -315,11 +315,11 @@ The views header , head , footer , and main (the content view) are in views/temp
 
 ### CONSTANTS
 
--VIEWS  (view folder path).
--LIBS   (libs folder path).
--CONFIG (config folder path).
--THEMEURL
--THEMEPATH
+- VIEWS  (view folder path)
+- LIBS   (libs folder path)
+- CONFIG (config folder path)
+- THEMEURL
+- THEMEPATH
 
 ### Methods of Site Class
 
