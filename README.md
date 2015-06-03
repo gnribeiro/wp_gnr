@@ -1,4 +1,4 @@
-# Object Oriented Wordpress Theme 
+# Wordpress Object Oriented Theme 
 
 This theme has several classes that will help you create a wordpress theme. You can find them in the folder libs. We will describe some of them
 
