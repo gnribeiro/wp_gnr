@@ -341,3 +341,45 @@ The views header , head , footer , and main (the content view) are in views/temp
 ```sh
     echo $site->pagination(10)
 ```
+### HELPER
+
+This class have like is name says some helpers:
+
+- current_uri() 
+```sh
+    HELPER::current_uri()
+```
+
+- current_url() 
+```sh
+    HELPER::current_url()
+```
+
+- get_protocol() 
+```sh
+    HELPER::get_protocol()
+```
+
+- redirect($location, $status=302)
+```sh
+    HELPER::redirect($location, $status)
+```
+
+
+- getSiteTitle()
+
+```sh
+    HELPER::getSiteTitle()
+```
+
+- siteInfo()
+
+```sh
+    HELPER::siteInfo()
+```
+
+- siteInfo($url , $class)
+
+```sh
+    HELPER::link_select("http://www.xpto.com" , "active")
+```
