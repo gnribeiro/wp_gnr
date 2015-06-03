@@ -138,7 +138,7 @@ If the above configuration file was called myconf.php, you could access it using
 
 ### Theme Options 
 
-Is a Configuration file where you could add some options that your theme will need. In this moment you can create only three type of inputs ( text , chekbox , select) 
+Is a configuration file where you could add some options that your theme will need. In this moment you can create only three type of inputs ( text , chekbox , select) 
 
 ```sh
     return array(
