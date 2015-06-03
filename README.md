@@ -197,7 +197,7 @@ Is a configuration file where you could add some options that your theme will ne
             ),
         )
     )
-```sh
+```
 
 ### Menu Config 
 
@@ -208,7 +208,7 @@ Is a Configuration file (menu.php) where you create all your theme menus
         array('primary' => 'Primary Navigation'),
         array('footer'  => 'Footer Navigation')
     );
-```sh
+```
 
 ### Site Config 
 Is a Configuration file (site.php) where you set all your theme configuration
