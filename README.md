@@ -378,7 +378,7 @@ This class have like is name says some helpers:
     HELPER::siteInfo()
 ```
 
-- siteInfo($url , $class)
+- link_select($url , $class)
 
 ```sh
     HELPER::link_select("http://www.xpto.com" , "active")
