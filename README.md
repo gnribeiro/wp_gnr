@@ -237,7 +237,7 @@ The folder is where your files.po will be and the name is the namespace of _e("s
 
 
 ### Content Post Types 
-Is a configuration file (customPostTypes.php) where will be all your content Post types . Use this site http://generatewp.com/post-type/ to help you to create your content Post types
+Is a  file (customPostTypes.php) in the config folder where will be all your content Post types. Use this site http://generatewp.com/post-type/ to help you to create your content Post types
 
 ### Flashdata
 
