@@ -48,8 +48,8 @@ This class should have all your Ajax code
 In the construtor of this class add the wordpress actions for ajax and the method that you will using
 
 ```sh
-add_action( 'wp_ajax_contacts',       array( &$this, 'contacts' ) );
-add_action( 'wp_ajax_nopriv_contacts', array( &$this, 'contacts' ) );
+add_action( 'wp_ajax_contacts',        array( $this, 'contacts' ) );
+add_action( 'wp_ajax_nopriv_contacts', array($this, 'contacts' ) );
 ```
 
 Then create the method
