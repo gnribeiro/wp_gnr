@@ -263,7 +263,7 @@ Delete all Flashdata:
 
 ### Views System
 
-A view is a simply php file that could be include in any place of our code and should have only html and data render, without any logic programming. This files are in the views folder
+A view is a simply php file that could be include in any place of our code, without any logic programming. This files are in the views folder
 
 Create a view and set is variables
 
