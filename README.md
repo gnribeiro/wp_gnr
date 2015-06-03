@@ -263,7 +263,7 @@ Delete all Flashdata:
 
 ### Views System
 
-A view is simply html file  that could include in any place of our code. This files are in the views folder
+A view is simply html file  that could be include in any place of our code. This files are in the views folder
 
 Create a view and set is variables
 
