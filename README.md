@@ -278,7 +278,7 @@ Create a view and set is variables
 
 ### Wordpress template files
 
-In this theme you dont need to always call the header and the footer you just need to set what is the view that should be rendered
+In this theme you dont need to always call the header and the footer, you just need to set what is the view that should be rendered
 
 ```sh
      global $site;
