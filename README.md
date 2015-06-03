@@ -69,7 +69,7 @@ This class should have all the wordpress hooks that you will create or use.
 
 - The Actions  should be  in the method custom_hooks_actions_noadmin or custom_hooks_actions.
 - The Filters  should be  in the method custom_hooks_filters_noadmin or custom_hooks_filters.
-- There is already the method pre_get_posts for the Action pre_get_posts 
+- There is already the method pre_get_posts for the action pre_get_posts 
 
 ```sh 
     public function custom_hooks_actions() 
