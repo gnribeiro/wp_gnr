@@ -283,7 +283,7 @@ In this theme you dont need to always call the header and the footer, you only n
 ```sh
      global $site;
     
-    $site->set_content('page' , array('template' =>'index'));
+    $site->set_content('page' , array('template' =>'PAGE'));
 ```
 
 In the set_content method the first parameter is the view you want to call , and the second parameter is a array of the view variables.
