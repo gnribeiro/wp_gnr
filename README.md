@@ -224,7 +224,7 @@ Is a configuration file (site.php) where you set all your theme configuration
 
 ### Lang Config 
 
-If your theme is multilang, there is also Configuration file (lang.php). 
+If your theme is multilang, there is also configuration file (lang.php). 
 
 ```sh
      return array(
