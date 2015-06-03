@@ -201,7 +201,7 @@ Is a configuration file where you could add some options that your theme will ne
 
 ### Menu Config 
 
-Is a Configuration file (menu.php) where you create all your theme menus 
+Is a configuration file (menu.php) where you create all your theme menus 
 
 ```sh
     return array(
@@ -211,7 +211,7 @@ Is a Configuration file (menu.php) where you create all your theme menus
 ```
 
 ### Site Config 
-Is a Configuration file (site.php) where you set all your theme configuration
+Is a configuration file (site.php) where you set all your theme configuration
 ```sh
     return array(
         'multilang'     => false,
