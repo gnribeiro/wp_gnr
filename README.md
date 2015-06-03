@@ -149,7 +149,6 @@ Is a configuration file where you could add some options that your theme will ne
                 'title'    => 'Teste Id',
                 'args'     => array(
                     'type'      => 'text',
-                    'id'        => 'teste_id',
                     'name'      => 'teste_id',
                     'desc'      => 'descrição  teste Id',
                     'class'     => 'css_class'
@@ -161,18 +160,17 @@ Is a configuration file where you could add some options that your theme will ne
                 'id'       => 'teste_id2',
                 'title'    => 'Teste Id2',
                 'args'     => array(
-                    'id'        => 'teste_id2',
                     'name'      => 'teste_id2',
                     'desc'      => 'descrição  teste Id2',
                     'class'     => 'css_class'
                 )
             ),
+            
             array(
                 'type'     => 'checkbox',
                 'id'       => 'responsive',
                 'title'    => 'Teste responsive',
                 'args'     => array(
-                    'id'        => 'responsive',
                     'value'     => '1',
                     'name'      => 'responsive',
                     'desc'      => 'descrição  responsive',
@@ -184,7 +182,6 @@ Is a configuration file where you could add some options that your theme will ne
                 'id'       => 'cores',
                 'title'    => 'cores',
                 'args'     => array(
-                    'id'        => 'cores',
                     'options'    => array(
                         'azul'    => 'cor azul',
                         'amarelo' => 'cor amarelo',
@@ -315,3 +312,32 @@ In the template file
 
 
 The views header , head , footer , and main (the content view) are in views/template/
+
+### CONSTANTS
+
+-VIEWS  (view folder path).
+-LIBS   (libs folder path).
+-CONFIG (config folder path).
+-THEMEURL
+-THEMEPATH
+
+### Methods of Site Class
+
+- set_view($view , $data = array())
+
+```sh
+    $site->set_view($view , $data )
+```
+
+- get_view($view , $data = array())
+
+```sh
+    $view = $site->get_view($view , $data )
+```
+
+- pagination($num_pages) 
+
+
+```sh
+    echo $site->pagination(10)
+```
