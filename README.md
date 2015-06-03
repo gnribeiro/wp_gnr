@@ -289,7 +289,7 @@ In this theme you dont need to always call the header and the footer, you only n
 In the set_content method the first parameter is the view you want to call , and the second parameter is a array of the view variables.
 
 
-You could do that also through the Site Class , create a method where will be all our code for this wordpress template and them use in the template file
+You could do that also through the Site Class this way.
 
 Site Class code :
 
