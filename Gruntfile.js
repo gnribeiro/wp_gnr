@@ -8,8 +8,8 @@ module.exports = function(grunt){
         
         files_js: {
             all:[
-                //'assets/js/vendor/bootstrap/assets/javascripts/bootstrap/*.js',
-                //'assets/js/vendor/bootstrap/*.js',
+                //'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                //'bower_components/jquery/jquery.min.js',
                 'assets/js/index.js'
             ]
         },
@@ -51,7 +51,7 @@ module.exports = function(grunt){
           dev: {
             options: {
               paths: ["assets/css"],
-              
+              compress: false,
               cleancss: true
             },
             files: {
@@ -109,7 +109,7 @@ module.exports = function(grunt){
                     '<%= files_js.all %>'
                 ],
                 tasks: [
-                  'uglify',
+                  'uglify:dev',
                   'notify:js'
                 ]
             },
@@ -117,13 +117,28 @@ module.exports = function(grunt){
             less: {
                 files: ['assets/less/*.less'],
                 tasks: [
-                  'less',
+                  'less:dev',
                   'notify:less'
                 ]
             }
         },
     });
 
-    grunt.registerTask('default',   ['less:dev','uglify:dev', 'cssmin','notify']);
-    grunt.registerTask('prod',      ['less:prod','uglify:prod', 'cssmin', 'notify']);
+    grunt.registerTask('default', [
+    'dev'
+    ]);
+    
+    grunt.registerTask('dev', [
+        'less:dev',
+        'uglify:dev',
+        'cssmin', 
+        'notify'
+    ]);
+    
+    grunt.registerTask('prod', [
+        'less:prod',                        
+        'uglify:prod', 
+        'cssmin', 
+        'notify'
+    ]);
 }
