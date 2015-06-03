@@ -236,7 +236,7 @@ If your theme is multilang, there is also configuration file (lang.php).
 The folder is where your files.po will be and the name is the namespace of _e("string" , namespace). Important in the configuration file site.php the option multilang should be true
 
 
-### Content POST Types 
+### Content Post Types 
 Is a configuration file (menu.php) where will be all your content Post types . Use this site http://generatewp.com/post-type/ to help you to create your content Post types
 
 ### Flashdata
