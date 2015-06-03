@@ -302,7 +302,7 @@ Site Class code :
     }
 ```
 
-In themplate file 
+In the template file 
 ```sh
     <?php 
         global $site;
