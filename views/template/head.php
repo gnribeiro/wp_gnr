@@ -11,8 +11,8 @@
 
     
     <link rel="shortcut icon" href="<?php echo THEMEURL?>favicon.ico" />
-    <link rel="stylesheet" href="<?php echo THEMEURL?>/assets/css/index.css">
-    <script src="<?php echo THEMEURL?>/assets/js/vendor/modernizr.min.js"></script>
+    <link rel="stylesheet" href="<?php echo THEMEURL?>assets/css/index.css">
+    <script src="<?php echo THEMEURL?>assets/js/vendor/modernizr.min.js"></script>
 
 
     <?php wp_head(); ?>
