@@ -19,7 +19,7 @@
         
         public function page()
         {
-            $this->view->template  = "PAGE";
+            $this->view->set('template', "PAGE");
             $content = $this->view->render('page');
             $this->content($content);
         }

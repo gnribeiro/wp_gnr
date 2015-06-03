@@ -92,24 +92,26 @@ Class Theme_Options_Admin{
         $options = Helper::load_config('theme_options') ;
         $validate_fields = array('text', 'checkbox', 'select');
         
-        foreach ($options['fields'] as $key => $value) {
-            
-            if(!in_array($value['type'] , $validate_fields))
-                continue;
-                 
-            switch ( $value['type']  ) {
-                 case 'text':
-                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_text'), "theme-options", "section", $value['args'] );
-                    register_setting("section",  $value['id']);
-                break;
-                 case 'checkbox':
-                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_checkbox'), "theme-options", "section", $value['args'] );
-                    register_setting("section",  $value['id']);
-                break;
-                 case 'select':
-                    add_settings_field( $value['id'], $value['title'], array($this , 'display_input_select'), "theme-options", "section", $value['args'] );
-                    register_setting("section",  $value['id']);
-                break;
+        if(count($options['fields'])){
+            foreach ($options['fields'] as $key => $value) {
+
+                if(!in_array($value['type'] , $validate_fields))
+                    continue;
+                $value['args']['id'] = $value['id'];       
+                switch ( $value['type']  ) {
+                     case 'text':
+                        add_settings_field( $value['id'], $value['title'], array($this , 'display_input_text'), "theme-options", "section", $value['args'] );
+                        register_setting("section",  $value['id']);
+                    break;
+                     case 'checkbox':
+                        add_settings_field( $value['id'], $value['title'], array($this , 'display_input_checkbox'), "theme-options", "section", $value['args'] );
+                        register_setting("section",  $value['id']);
+                    break;
+                     case 'select':
+                        add_settings_field( $value['id'], $value['title'], array($this , 'display_input_select'), "theme-options", "section", $value['args'] );
+                        register_setting("section",  $value['id']);
+                    break;
+                }
             }
         }
     }

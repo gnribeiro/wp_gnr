@@ -16,10 +16,13 @@ class Helper {
         return rtrim(preg_replace(array('@\?.*$@' , '#^/#' , '@page/[\d]+@'), array('' , '', ''), $_SERVER['REQUEST_URI']) , '/');
     }
 
-    public static  function get_id_by_slug($slug , $type){
-      $page = get_page_by_path( $slug );
-       return icl_object_id($page->ID, $type, true);
-
+    public static  function get_id_by_slug($slug , $type)
+    {
+        if(!function_exists('icl_object_id'))
+            return;
+        
+        $page = get_page_by_path( $slug );
+        return icl_object_id($page->ID, $type, true);
     }
 
      public static  function get_link_translation($slug , $type ){
@@ -184,13 +187,7 @@ class Helper {
 
           }
         }
-        elseif(is_post_type_archive('promotions')){
-           $title = (ICL_LANGUAGE_CODE == 'en') ?  "Promotions "   :  "Promoções";
-            return $title;
-        }
         else {
-
-
 
         $title = wp_title('-' , true, 'right');
 
@@ -285,6 +282,8 @@ class Helper {
     public static  function get_flashdata($type) {
         self::init_flashdata();
         $message = empty($_SESSION['gwp_mvc_flash'][$type]) ? null : $_SESSION['gwp_mvc_flash'][$type];
+        //echo var_dump( $type);
+        self::unset_flashdata($type);
         return $message;
     }
 

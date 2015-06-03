@@ -6,8 +6,8 @@ require_once LIBS . 'validFluent.php';
 Class Gwp_Ajax{
 
     function __construct(){
-        // add_action( 'wp_ajax_contacts',       array( &$this, 'contacts' ) );
-        // add_action( 'wp_ajax_nopriv_contacts', array( &$this, 'contacts' ) );
+        // add_action( 'wp_ajax_contacts',       array( $this, 'contacts' ) );
+        // add_action( 'wp_ajax_nopriv_contacts', array( $this, 'contacts' ) );
 
     }
 
@@ -18,5 +18,5 @@ Class Gwp_Ajax{
     }
 }
 
-$contacts = new Gwp_Ajax();
+$ajax_instance = new Gwp_Ajax();
 ?>

@@ -12,13 +12,11 @@
     
     <link rel="shortcut icon" href="<?php echo THEMEURL?>favicon.ico" />
     <link rel="stylesheet" href="<?php echo THEMEURL?>/assets/css/index.css">
-    <script src="<?php echo THEMEURL?>/assets/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="<?php echo THEMEURL?>/assets/js/vendor/modernizr.min.js"></script>
 
 
     <?php wp_head(); ?>
-    <!--[if lt IE 9]>
-        <script src="<?php echo THEMEURL?>/assets/js/vendor/selectivizr-min.js"></script> 
-    <![endif]-->
+   
 
     <script type='text/javascript'>
     /* <![CDATA[ */
