@@ -233,7 +233,7 @@ If your theme is multilang, there is also configuration file (lang.php).
     );
 ```
 
-The folder is where your files.po will be and the name is the namespace of _E("string" , namespace). Important in the configuration file site.php the option multilang should be true
+The folder is where your files.po will be and the name is the namespace of _e("string" , namespace). Important in the configuration file site.php the option multilang should be true
 
 
 ### Flashdata
