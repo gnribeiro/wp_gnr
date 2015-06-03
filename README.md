@@ -343,7 +343,7 @@ The views header , head , footer , and main (the content view) are in views/temp
 ```
 ### HELPER
 
-This class have, like is name says, some helpers:
+This class have, like her name says, some helpers:
 
 - current_uri() 
 ```sh
