@@ -79,18 +79,35 @@ Class Theme_Options_Admin{
             $this->view->set($key , $value) ;
         }
         
-     
         echo $this->view->render("admin/theme_options/select");
+    }
+    
+    
+    public function display_input_radio($args)
+    {
+                
+        foreach($args as $key => $value)
+        { 
+            
+            if($key == 'id'){
+                $value = stripslashes($value);
+                $value = esc_attr( $value);
+            }
+               
+            $this->view->set($key , $value) ;
+        }
+        
+     
+        echo $this->view->render("admin/theme_options/radio");
     
     }
-
 
     public function gwp_register_settings()
     {
         add_settings_section("section", "All Settings", null, "theme-options");
         
         $options = Helper::load_config('theme_options') ;
-        $validate_fields = array('text', 'checkbox', 'select');
+        $validate_fields = array('text', 'checkbox', 'select', 'radio');
         
         if(count($options['fields'])){
             foreach ($options['fields'] as $key => $value) {
@@ -109,6 +126,10 @@ Class Theme_Options_Admin{
                     break;
                      case 'select':
                         add_settings_field( $value['id'], $value['title'], array($this , 'display_input_select'), "theme-options", "section", $value['args'] );
+                        register_setting("section",  $value['id']);
+                    break;
+                    case 'radio':
+                        add_settings_field( $value['id'], $value['title'], array($this , 'display_input_radio'), "theme-options", "section", $value['args'] );
                         register_setting("section",  $value['id']);
                     break;
                 }
