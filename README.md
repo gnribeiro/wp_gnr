@@ -138,7 +138,7 @@ If the above configuration file was called myconf.php, you could access it using
 
 ### Theme Options 
 
-Is a configuration file where you could add some options that your theme will need. In this moment you can create only three type of inputs ( text , chekbox , select) 
+Is a configuration file where you could add some options that your theme will need. In this moment you can create only four type of inputs ( text , chekbox , select, radio) 
 
 ```sh
     return array(
@@ -190,6 +190,18 @@ Is a configuration file where you could add some options that your theme will ne
                     'name'      => 'cores',
                     'desc'      => 'descrição cores',
                     'class'     => 'cores'
+                )
+            ),
+            
+            array(
+                'type'     => 'radio',
+                'id'       => 'maintenance',
+                'title'    => 'maintenance',
+                'args'     => array(
+                    'options'   => array('yes'=> 'Sim', 'no' =>'Não'),
+                    'name'      => 'maintenance',
+                    'desc'      => 'descrição maintenance',
+                    'class'     => 'maintenance'
                 )
             ),
         )
