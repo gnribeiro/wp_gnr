@@ -335,7 +335,51 @@ The views header , head , footer , and main (the content view) are in views/temp
 
 ### Properties of Site Class
 
-- data_header , a array where you can store data, that could access in the view template/header.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
+- data_header , a array where you can store data, that could access in the view template/header.php. In the __construct  of class Site, set this properties, doing this away, the data that you define is the same in all site
+
+
+```sh
+    //In Site.php
+    
+    function __construct()
+    {
+        parent::__construct();
+        $this->data_header = array( "teste" => "data header");
+        
+    }
+```
+
+
+```sh
+    //In template/header.php
+    
+    <?php if(isset($data_header['teste'])) echo $data_header['teste'] ?>
+```
+
+
+- data_footer , a array where you can store data, that could access in the view template/footer.php. In the __construct  of class Site, set this properties, doing this away, the data that you define is the same in all site
+
+
+
+```sh
+    //In Site.php 
+    
+    function __construct()
+    {
+        parent::__construct();
+        $this->data_footer = array( "teste" => "data footer");    
+    }
+    
+```
+In template/footer.php
+
+```sh
+    //template/footer.php
+    
+    <?php if(isset($data_footer['teste'])) echo $data_footer['teste'] ?>
+```
+
+- data_main , a array where you can store data, that could access in the view template/main.php. In the __construct  of class Site, set this properties, doing this away, the data that you define is the same in all site
 
 
 
@@ -343,53 +387,10 @@ The views header , head , footer , and main (the content view) are in views/temp
     //In Site.php
     
     function __construct()
-        {
-            parent::__construct();
-            $this->data_header = array( "teste" => "data header");
-        
-        }
-```
-
-
-```sh
-    //In template/header.php
-    <?php if(isset($data_header['teste'])) echo $data_header['teste'] ?>
-```
-
-
-- data_footer , a array where you can store data, that could access in the view template/footer.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
-
-
-
-```sh
-    //In Site.php 
-    
-     function __construct()
-        {
-            parent::__construct();
-            $this->data_footer = array( "teste" => "data footer");
-        
-        }
-```
-In template/footer.php
-
-```sh
-    //template/footer.php
-    <?php if(isset($data_footer['teste'])) echo $data_footer['teste'] ?>
-```
-
-- data_main , a array where you can store data, that could access in the view template/main.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
-
-
-
-```sh
-    //In Site.php 
-     function __construct()
-        {
-            parent::__construct();
-            $this->data_main = array( "teste" => "data main");
-        
-        }
+    {
+        parent::__construct();
+        $this->data_main = array( "teste" => "data main");    
+    }
 ```
 
 
@@ -403,8 +404,6 @@ In template/footer.php
 ### Methods of Site Class
 
 - set_data_header($data_header = array()), you set the $data_header just in the specific  method , and could only access to this data when, you call this method
-
-
 
 
 ```sh
