@@ -335,34 +335,35 @@ The views header , head , footer , and main (the content view) are in views/temp
 
 ### Properties of Site Class
 
-- data_header , a array where you can store data, that could access in the view template/header.php
+- data_header , a array where you can store data, that could access in the view template/header.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In Site.php 
 
 ```sh
-     function __construct()
+    //In Site.php
+    
+    function __construct()
         {
             parent::__construct();
             $this->data_header = array( "teste" => "data header");
         
         }
 ```
-In template/header.php
+
 
 ```sh
+    //In template/header.php
     <?php if(isset($data_header['teste'])) echo $data_header['teste'] ?>
 ```
 
 
-- data_footer , a array where you can store data, that could access in the view template/footer.php
+- data_footer , a array where you can store data, that could access in the view template/footer.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In Site.php 
 
 ```sh
+    //In Site.php 
+    
      function __construct()
         {
             parent::__construct();
@@ -373,16 +374,16 @@ In Site.php
 In template/footer.php
 
 ```sh
+    //template/footer.php
     <?php if(isset($data_footer['teste'])) echo $data_footer['teste'] ?>
 ```
 
-- data_main , a array where you can store data, that could access in the view template/main.php
+- data_main , a array where you can store data, that could access in the view template/main.php. In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
 
-In Site.php 
 
 ```sh
+    //In Site.php 
      function __construct()
         {
             parent::__construct();
@@ -390,9 +391,11 @@ In Site.php
         
         }
 ```
-In template/footer.php
+
 
 ```sh
+    //In template/main.php
+    
     <?php if(isset($data_main['teste'])) echo $data_main['teste'] ?>
 ```
 
@@ -402,9 +405,11 @@ In template/footer.php
 - set_data_header($data_header = array()), you set the $data_header just in the specific  method , and could only access to this data when, you call this method
 
 
-In Site.php 
+
 
 ```sh
+    //In Site.php 
+    
     public function index()
     {
         $data_header = array( "teste" => "data header");
@@ -417,10 +422,9 @@ In Site.php
 
 - set_data_footer($data_footer= array()), you set the $data_footer just in the specific  method , and could only access to this data when, you call this method
 
-
-In Site.php 
-
 ```sh
+    //In Site.php 
+    
     public function index()
     {
         $data_footer = array( "teste" => "data footer");
@@ -433,10 +437,10 @@ In Site.php
 
 - set_data_main($data_main= array()), you set the $data_main just in the specific  method , and could only access to this data when, you call this method
 
-
-In Site.php 
-
 ```sh
+
+    //In Site.php 
+    
     public function index()
     {
         $data_main = array( "teste" => "data main");
