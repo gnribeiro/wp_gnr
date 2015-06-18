@@ -333,7 +333,136 @@ The views header , head , footer , and main (the content view) are in views/temp
 - THEMEURL
 - THEMEPATH
 
+### Properties of Site Class
+
+- data_header , a array where you can store data, that could access in the view template/header.php
+
+In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
+
+In Site.php 
+
+```sh
+     function __construct()
+        {
+            parent::__construct();
+            $this->data_header = array( "teste" => "data header");
+        
+        }
+```
+In template/header.php
+
+```sh
+    <?php if(isset($data_header['teste'])) echo $data_header['teste'] ?>
+```
+
+
+- data_footer , a array where you can store data, that could access in the view template/footer.php
+
+In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
+
+In Site.php 
+
+```sh
+     function __construct()
+        {
+            parent::__construct();
+            $this->data_footer = array( "teste" => "data footer");
+        
+        }
+```
+In template/footer.php
+
+```sh
+    <?php if(isset($data_footer['teste'])) echo $data_footer['teste'] ?>
+```
+
+- data_main , a array where you can store data, that could access in the view template/main.php
+
+In the __construct  of class Site you could set this properties, doing this away the data that you define is the same in all site
+
+In Site.php 
+
+```sh
+     function __construct()
+        {
+            parent::__construct();
+            $this->data_main = array( "teste" => "data main");
+        
+        }
+```
+In template/footer.php
+
+```sh
+    <?php if(isset($data_main['teste'])) echo $data_main['teste'] ?>
+```
+
+
 ### Methods of Site Class
+
+- set_data_header($data_header = array()), you set the $data_header just in the specific  method , and could only access to this data when, you call this method
+
+
+In Site.php 
+
+```sh
+    public function index()
+    {
+        $data_header = array( "teste" => "data header");
+        $this->set_data_header($data_header);
+            
+        $content = $this->view->render('index');
+        $this->content($content);
+    }
+```
+
+- set_data_footer($data_footer= array()), you set the $data_footer just in the specific  method , and could only access to this data when, you call this method
+
+
+In Site.php 
+
+```sh
+    public function index()
+    {
+        $data_footer = array( "teste" => "data footer");
+        $this->set_data_footer($data_footer);
+            
+        $content = $this->view->render('index');
+        $this->content($content);
+    }
+```
+
+- set_data_main($data_main= array()), you set the $data_main just in the specific  method , and could only access to this data when, you call this method
+
+
+In Site.php 
+
+```sh
+    public function index()
+    {
+        $data_main = array( "teste" => "data main");
+        $this->set_data_main($data_footer);
+            
+        $content = $this->view->render('index');
+        $this->content($content);
+    }
+```
+
+- set_data_header($data_header = array()), you set the $data_header just in a specific  method , and could only access to this data when you call this method
+
+
+In Site.php 
+
+```sh
+    public function index()
+    {
+        $data_header = array( "teste" => "data header");
+        $this->set_data_header($data_header);
+            
+        $content = $this->view->render('index');
+        $this->content($content);
+    }
+```
+
 
 - set_view($view , $data = array())
 
