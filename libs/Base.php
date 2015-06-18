@@ -22,6 +22,32 @@ Class Base{
     {
         return Helper::siteInfo();
     }
+    
+    public function set_data_header($data_header= array())
+    {   
+        foreach($data_header as $key => $value){ 
+          $this->data_header[$key]  =  $value;
+        }
+        
+    }
+    
+    
+    public function set_data_footer($data_footer= array())
+    {   
+        foreach($data_footer as $key => $value){ 
+          $this->data_footer[$key]  =  $value;
+        }
+        
+    }
+    
+        
+    public function set_data_main($data_main= array())
+    {   
+        foreach($data_main as $key => $value){ 
+          $this->data_main[$key]  =  $value;
+        }
+        
+    }
 
 
     public function set_header()
@@ -43,7 +69,7 @@ Class Base{
     
     public function content($content)
     {
-        
+       
         echo $this->set_header();
         
         $this->view->set('content', $content);

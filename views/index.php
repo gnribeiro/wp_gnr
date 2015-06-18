@@ -9,6 +9,8 @@
 
 
 <?php
+    
+    pr( class_exists("KnewsPlugin"));
     //echo do_shortcode('[youtube id="qPKKtvkVAjY" ]Check out this video![/youtube]');
     //do_action("wploop_query" , 'post_type=page&name=teste');
     //do_action("wploop");

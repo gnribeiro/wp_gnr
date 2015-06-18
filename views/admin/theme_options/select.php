@@ -4,6 +4,5 @@
     <?php endforeach; ?>
 </select>
 <?php  if(isset($desc)):?>
-    <br>
-    <div class="desc"><?php echo $desc ?></div>
+    <p class="description "><?php echo $desc ?></p>
 <?php  endif;?>

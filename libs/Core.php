@@ -1,7 +1,8 @@
 <?php
-$views  = 'views';
-$libs   = 'libs';
-$config = 'config';
+$views   = 'views';
+$libs    = 'libs';
+$config  = 'config';
+$messages = 'messages';
 
 if ( ! is_dir($views) AND is_dir(DOCROOT.$views)){
       $views = DOCROOT.$views;
@@ -15,19 +16,25 @@ if ( ! is_dir($config) AND is_dir(DOCROOT.$config)){
     $config = DOCROOT.$config;
 }
 
+if ( ! is_dir($messages) AND is_dir(DOCROOT.$messages)){
+    $messages = DOCROOT.$messages;
+}
+
 define('VIEWS'     , realpath($views).DIRECTORY_SEPARATOR);
 define('LIBS'      , realpath($libs).DIRECTORY_SEPARATOR);
 define('CONFIG'    , realpath($config).DIRECTORY_SEPARATOR);
+define('MESSAGES'  , realpath($messages).DIRECTORY_SEPARATOR);
 define('THEMEURL'  , get_template_directory_uri().DIRECTORY_SEPARATOR);
 define('THEMEPATH' , get_template_directory().DIRECTORY_SEPARATOR);
 
-unset($libs, $views, $config);
+unset($libs, $views, $config, $messages);
 
  if(is_file( $customPostTypes =  CONFIG . 'customPostTypes.php'))
         include $customPostTypes ;
 
 include LIBS . 'View' . EXT;
 include LIBS . 'Helper' . EXT;
+
 
 $load_libs = array(
     'Gwp_Hooks',

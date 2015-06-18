@@ -16,6 +16,7 @@ class Helper {
         return rtrim(preg_replace(array('@\?.*$@' , '#^/#' , '@page/[\d]+@'), array('' , '', ''), $_SERVER['REQUEST_URI']) , '/');
     }
 
+    
     public static  function get_id_by_slug($slug , $type)
     {
         if(!function_exists('icl_object_id'))
@@ -25,6 +26,175 @@ class Helper {
         return icl_object_id($page->ID, $type, true);
     }
 
+    
+     public static function message($file, $path = NULL, $default = NULL)
+    {
+         static $messages;
+        
+        if ( ! isset($messages[$file]))
+        {
+            $messages[$file] = array();
+
+            if ($files = self::load_messages($file))
+            {
+
+                $messages[$file] = array_merge($messages[$file], $files);
+            }
+        }
+    
+
+        if ($path === NULL)
+        {
+            return $messages[$file];
+        }
+        else
+        {
+            return self::arraypath($messages[$file], $path, $default);
+        }
+    }
+    
+    
+    public static function load_messages($file) {
+        $file = MESSAGES . $file;
+        return self::load_file($file);
+    }
+    
+    
+    public static function arraypath($array, $path, $default = NULL, $delimiter = NULL)
+    {
+        if ( ! is_array($array))
+        {
+            return $default;
+        }
+
+        if (is_array($path))
+        {
+            $keys = $path;
+        }
+        else
+        {
+            if (array_key_exists($path, $array))
+            {
+                // No need to do extra processing
+                return $array[$path];
+            }
+
+            if ($delimiter === NULL)
+            {
+                // Use the default delimiter
+                $delimiter = '.';
+            }
+
+            // Remove starting delimiters and spaces
+            $path = ltrim($path, "{$delimiter} ");
+
+            // Remove ending delimiters, spaces, and wildcards
+            $path = rtrim($path, "{$delimiter} *");
+
+            // Split the keys by delimiter
+            $keys = explode($delimiter, $path);
+        }
+
+        do
+        {
+            $key = array_shift($keys);
+
+            if (ctype_digit($key))
+            {
+                // Make the key an integer
+                $key = (int) $key;
+            }
+
+            if (isset($array[$key]))
+            {
+                if ($keys)
+                {
+                    if (is_array($array[$key]))
+                    {
+                        // Dig down into the next part of the path
+                        $array = $array[$key];
+                    }
+                    else
+                    {
+                        // Unable to dig deeper
+                        break;
+                    }
+                }
+                else
+                {
+                    // Found the path requested
+                    return $array[$key];
+                }
+            }
+            elseif ($key === '*')
+            {
+                // Handle wildcards
+
+                $values = array();
+                foreach ($array as $arr)
+                {
+                    if ($value = self::arraypath($arr, implode('.', $keys)))
+                    {
+                        $values[] = $value;
+                    }
+                }
+
+                if ($values)
+                {
+                    // Found the values requested
+                    return $values;
+                }
+                else
+                {
+                    // Unable to dig deeper
+                    break;
+                }
+            }
+            else
+            {
+                // Unable to dig deeper
+                break;
+            }
+        }
+        while ($keys);
+
+        // Unable to find the value requested
+        return $default;
+    }
+    
+    
+    
+    public static function arraymap($callbacks, $array, $keys = NULL)
+    {
+        foreach ($array as $key => $val)
+        {
+            if (is_array($val))
+            {
+                $array[$key] = self::arraymap($callbacks, $array[$key]);
+            }
+            elseif ( ! is_array($keys) or in_array($key, $keys))
+            {
+                if (is_array($callbacks))
+                {
+                    foreach ($callbacks as $cb)
+                    {
+                        $array[$key] = call_user_func($cb, $array[$key]);
+                    }
+                }
+                else
+                {
+                    $array[$key] = call_user_func($callbacks, $array[$key]);
+                }
+            }
+        }
+
+        return $array;
+    }
+    
+    
+    
+    
+    
      public static  function get_link_translation($slug , $type ){
        $id = self::get_id_by_slug($slug , $type );
        return get_page_link(  $id  );
