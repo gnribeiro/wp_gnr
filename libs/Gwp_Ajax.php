@@ -18,5 +18,5 @@ Class Gwp_Ajax{
     }
 }
 
-$ajax_instance = new Gwp_Ajax();
+
 ?>

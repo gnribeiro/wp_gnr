@@ -38,7 +38,7 @@ class Helper {
             if ($files = self::load_messages($file))
             {
 
-                $messages[$file] = array_merge($messages[$file], $files);
+                $messages[$file] =  Wparr::merge($messages[$file], $files);
             }
         }
     
@@ -49,9 +49,10 @@ class Helper {
         }
         else
         {
-            return self::arraypath($messages[$file], $path, $default);
+          return Wparr::path($messages[$file], $path, $default);
         }
     }
+
     
     
     public static function load_messages($file) {

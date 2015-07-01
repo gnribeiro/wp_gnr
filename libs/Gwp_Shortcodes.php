@@ -24,5 +24,4 @@ Class Gwp_Shortcodes {
     }
 }
 
-Gwp_Shortcodes::init();
 ?>

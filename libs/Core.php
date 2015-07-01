@@ -37,11 +37,7 @@ include LIBS . 'Helper' . EXT;
 
 
 $load_libs = array(
-    'Gwp_Hooks',
-    'Base',
-    'Site',
-    'Gwp_Shortcodes',
-    'Gwp_Form_Handler'
+    'GWP_Autoloader',
 );
 
 
@@ -58,7 +54,15 @@ if(is_admin()){
 }
 
 if(!is_admin()){
-    $site_instance = new Site();
+    $autoloader    = new GWP_Autoloader();
+    
+    Gwp_Form_Handler::init();
+    Gwp_Shortcodes::init();
+    
+    $ajax_instance  = new Gwp_Ajax();
+    $hooks_instance = new Gwp_Hooks();
+    $site_instance  = new Site();
+    
     $GLOBALS['site'] = $site_instance;
 }
 

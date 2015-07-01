@@ -154,8 +154,4 @@ Class Gwp_Hooks{
     }
 
 }
-
-
-$grhooks = new Gwp_Hooks();
 ?>
-
